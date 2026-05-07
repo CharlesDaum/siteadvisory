@@ -1,65 +1,79 @@
-import Image from "next/image";
+import HeroSection from '@/components/sections/HeroSection'
+import MetricsBar from '@/components/sections/MetricsBar'
+import ApproacheTimeline from '@/components/sections/ApproacheTimeline'
+import ServicesGrid from '@/components/sections/ServicesGrid'
+import CasUsageGrid from '@/components/sections/CasUsageGrid'
+import TestimonialsSection from '@/components/sections/TestimonialsSection'
+import BlogPreview from '@/components/sections/BlogPreview'
+import ContactCTA from '@/components/sections/ContactCTA'
+import { BlogPost } from '@/types/contentful'
 
-export default function Home() {
+// Mocking some posts until Contentful is fully connected
+const mockPosts: BlogPost[] = [
+  {
+    title: 'Comment l\'IA Générative redéfinit le service client en 2024',
+    slug: 'ia-generative-service-client',
+    excerpt: 'Découvrez comment les LLMs permettent d\'automatiser jusqu\'à 80% des requêtes de niveau 1 tout en améliorant la satisfaction client.',
+    category: 'Cas Client',
+    readingTime: 5,
+    author: 'Jean Dupont',
+    publishedAt: '2024-05-02T10:00:00Z',
+    featured: true,
+    content: {} as any,
+    coverImage: {
+      url: 'https://images.unsplash.com/photo-1596524430615-b46475ddff6e?q=80&w=800&auto=format&fit=crop',
+      alt: 'Service client IA',
+      width: 800,
+      height: 600
+    }
+  },
+  {
+    title: 'Gouvernance de l\'IA : Les 5 piliers pour un déploiement sécurisé',
+    slug: 'gouvernance-ia-piliers',
+    excerpt: 'Face au AI Act européen, quelles sont les étapes indispensables pour sécuriser vos données et garantir l\'éthique de vos modèles ?',
+    category: 'Réglementation',
+    readingTime: 8,
+    author: 'Sophie Martin',
+    publishedAt: '2024-04-28T14:30:00Z',
+    featured: false,
+    content: {} as any,
+    coverImage: {
+      url: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=800&auto=format&fit=crop',
+      alt: 'Gouvernance IA',
+      width: 800,
+      height: 600
+    }
+  },
+  {
+    title: 'RAG vs Fine-tuning : Quelle approche pour vos données métiers ?',
+    slug: 'rag-vs-fine-tuning',
+    excerpt: 'Comprendre les différences techniques et économiques entre le Retrieval-Augmented Generation et le ré-entraînement de modèles.',
+    category: 'Technique',
+    readingTime: 6,
+    author: 'Marc Leroy',
+    publishedAt: '2024-04-15T09:15:00Z',
+    featured: false,
+    content: {} as any,
+    coverImage: {
+      url: 'https://images.unsplash.com/photo-1555949963-ff9fe0c870eb?q=80&w=800&auto=format&fit=crop',
+      alt: 'Code et architecture',
+      width: 800,
+      height: 600
+    }
+  }
+]
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
-  );
+    <>
+      <HeroSection />
+      <MetricsBar />
+      <ApproacheTimeline preview />
+      <ServicesGrid preview />
+      <CasUsageGrid preview />
+      <TestimonialsSection />
+      <BlogPreview posts={mockPosts} />
+      <ContactCTA />
+    </>
+  )
 }
