@@ -1,98 +1,115 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import SectionHeader from '@/components/ui/SectionHeader'
-import Card from '@/components/ui/Card'
-import Badge from '@/components/ui/Badge'
 import { ArrowRight, Clock, Calendar } from 'lucide-react'
 import Link from 'next/link'
 import { BlogPost } from '@/types/contentful'
 import { formatDate } from '@/lib/utils'
+import { staggerContainer, staggerItem } from '@/lib/animations'
 
 interface BlogPreviewProps {
   posts: BlogPost[]
+}
+
+const CATEGORY_COLORS: Record<string, string> = {
+  'Cas Client': 'text-emerald-400 bg-emerald-400/10 border-emerald-400/20',
+  'Réglementation': 'text-amber-400 bg-amber-400/10 border-amber-400/20',
+  'Technique': 'text-cyan-400 bg-cyan-400/10 border-cyan-400/20',
 }
 
 export default function BlogPreview({ posts }: BlogPreviewProps) {
   if (!posts || posts.length === 0) return null
 
   return (
-    <section className="py-32 relative overflow-hidden">
-      <div className="container mx-auto px-6 relative z-10">
-        <SectionHeader 
-          title="Dernières Insights"
-          subtitle="Analyses, décryptages et retours d'expérience de nos experts sur l'impact de l'IA dans le monde de l'entreprise."
-          badge="BLOG"
-          className="mb-16"
-        />
+    <section className="py-28 relative overflow-hidden">
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="container mx-auto px-6 relative z-10">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16"
+        >
+          <div className="max-w-xl">
+            <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-text-secondary mb-5">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent-primary" />
+              Insights & Analyses
+            </span>
+            <h2 className="font-body text-4xl font-semibold text-white md:text-5xl tracking-[-0.02em] leading-[1.1]">
+              L'IA expliquée par{' '}
+              <span className="italic font-normal text-accent-primary">des praticiens.</span>
+            </h2>
+          </div>
+          <Link
+            href="/blog"
+            className="inline-flex items-center gap-2 text-sm text-text-secondary hover:text-white transition-colors group shrink-0"
+          >
+            Tous les articles
+            <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+          </Link>
+        </motion.div>
+
+        {/* Posts grid */}
+        <motion.div
+          variants={staggerContainer}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: '-50px' }}
+          className="grid grid-cols-1 md:grid-cols-3 gap-6"
+        >
           {posts.map((post, idx) => (
-            <motion.div
-              key={post.slug}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: '-50px' }}
-              transition={{ delay: idx * 0.1 }}
-              className="h-full"
-            >
+            <motion.div key={post.slug} variants={staggerItem} className="h-full">
               <Link href={`/blog/${post.slug}`} className="block h-full group">
-                <Card hoverable className="h-full flex flex-col p-0 overflow-hidden bg-bg-card border-border-subtle">
-                  <div className="relative h-48 w-full overflow-hidden">
-                    {/* Placeholder image if not connected to Contentful yet */}
-                    <div className="absolute inset-0 bg-accent-primary/20 transition-transform duration-500 group-hover:scale-105" />
+                <article className="h-full flex flex-col rounded-2xl bg-white/[0.03] border border-white/[0.07] overflow-hidden hover:border-accent-primary/20 transition-colors">
+                  {/* Image */}
+                  <div className="relative h-48 overflow-hidden">
                     {post.coverImage && (
-                      <img 
-                        src={post.coverImage.url} 
-                        alt={post.coverImage.alt || post.title} 
+                      <img
+                        src={post.coverImage.url}
+                        alt={post.coverImage.alt || post.title}
                         className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                     )}
-                    <div className="absolute top-4 left-4">
-                      <Badge variant="default" className="bg-bg-primary/80 backdrop-blur-md border-transparent text-accent-primary">
-                        {post.category}
-                      </Badge>
-                    </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/80 to-transparent" />
+                    <span className={`absolute top-4 left-4 inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-semibold ${CATEGORY_COLORS[post.category] || 'text-accent-primary bg-accent-primary/10 border-accent-primary/20'}`}>
+                      {post.category}
+                    </span>
                   </div>
-                  
-                  <div className="p-6 flex flex-col flex-grow">
+
+                  {/* Content */}
+                  <div className="flex flex-col flex-grow p-6">
                     <div className="flex items-center gap-4 text-xs text-text-muted mb-4">
-                      <div className="flex items-center gap-1">
+                      <span className="flex items-center gap-1">
                         <Calendar className="h-3 w-3" />
-                        <span>{formatDate(post.publishedAt)}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
+                        {formatDate(post.publishedAt)}
+                      </span>
+                      <span className="flex items-center gap-1">
                         <Clock className="h-3 w-3" />
-                        <span>{post.readingTime} min</span>
-                      </div>
+                        {post.readingTime} min de lecture
+                      </span>
                     </div>
-                    
-                    <h3 className="text-xl font-display font-bold text-white mb-3 group-hover:text-accent-primary transition-colors">
+
+                    <h3 className="font-display text-lg font-bold text-white mb-3 leading-snug group-hover:text-accent-primary transition-colors line-clamp-2">
                       {post.title}
                     </h3>
-                    
-                    <p className="text-text-secondary text-sm leading-relaxed flex-grow line-clamp-3">
+
+                    <p className="text-sm text-text-secondary leading-relaxed line-clamp-3 flex-grow mb-5">
                       {post.excerpt}
                     </p>
-                    
-                    <div className="mt-6 flex items-center text-sm font-semibold text-accent-primary">
+
+                    <span className="flex items-center gap-1.5 text-sm font-semibold text-accent-primary mt-auto">
                       Lire l'article
-                      <ArrowRight className="ml-2 h-4 w-4 transform transition-transform group-hover:translate-x-1" />
-                    </div>
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
                   </div>
-                </Card>
+                </article>
               </Link>
             </motion.div>
           ))}
-        </div>
-
-        <div className="mt-16 flex justify-center">
-          <Link href="/blog" className="inline-flex items-center justify-center px-6 py-3 rounded-md bg-white/5 text-white hover:bg-white/10 transition-colors font-medium">
-            Voir tous les articles
-            <ArrowRight className="ml-2 h-4 w-4" />
-          </Link>
-        </div>
+        </motion.div>
       </div>
+
     </section>
   )
 }

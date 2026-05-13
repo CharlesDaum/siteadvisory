@@ -1,11 +1,10 @@
 import { Metadata } from 'next'
 import { getAllPosts } from '@/lib/contentful'
 import Link from 'next/link'
-import Card from '@/components/ui/Card'
-import Badge from '@/components/ui/Badge'
 import { Calendar, Clock, ArrowRight } from 'lucide-react'
 import { formatDate } from '@/lib/utils'
 import ContactCTA from '@/components/sections/ContactCTA'
+import PageHero from '@/components/ui/PageHero'
 
 export const metadata: Metadata = {
   title: 'Blog & Insights',
@@ -19,105 +18,99 @@ export default async function BlogPage({
 }) {
   const { category } = await searchParams
   const posts = await getAllPosts()
-  
-  const filteredPosts = category 
+
+  const filteredPosts = category
     ? posts.filter(p => p.category === category)
     : posts
 
-  // Get unique categories
   const categories = Array.from(new Set(posts.map(p => p.category)))
 
   return (
     <>
-      <section className="relative pt-32 pb-16 bg-bg-primary overflow-hidden border-b border-border-subtle">
-        <div className="absolute inset-0 z-0 bg-dot-pattern opacity-30 mix-blend-screen" />
-        <div className="container relative z-10 mx-auto px-6 text-center">
-          <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6">
-            Insights & <span className="text-accent-primary">Analyses</span>
-          </h1>
-          <p className="max-w-2xl mx-auto text-lg text-text-secondary">
-            Décryptage des tendances IA, conseils stratégiques et retours d'expérience pour éclairer vos décisions.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        badge="Insights & Analyses"
+        title="Décryptages IA"
+        titleAccent="par des praticiens"
+        subtitle="Tendances, conseils stratégiques et retours d'expérience pour éclairer vos décisions et garder une longueur d'avance."
+        align="center"
+      />
 
-      <section className="py-24 bg-bg-secondary">
+      <section className="py-20">
         <div className="container mx-auto px-6">
-          
+
           {/* Categories Filter */}
-          <div className="mb-12 flex flex-wrap justify-center gap-3">
-            <Link 
+          <div className="mb-12 flex flex-wrap justify-center gap-2">
+            <Link
               href="/blog"
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${!category ? 'bg-white text-black' : 'bg-white/5 text-text-secondary hover:text-white'}`}
+              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${!category ? 'bg-accent-primary text-white' : 'bg-white/5 text-text-secondary hover:text-white hover:bg-white/10'}`}
             >
               Tous
             </Link>
             {categories.map(cat => (
-              <Link 
+              <Link
                 key={cat}
                 href={`/blog?category=${encodeURIComponent(cat)}`}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${category === cat ? 'bg-white text-black' : 'bg-white/5 text-text-secondary hover:text-white'}`}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${category === cat ? 'bg-accent-primary text-white' : 'bg-white/5 text-text-secondary hover:text-white hover:bg-white/10'}`}
               >
                 {cat}
               </Link>
             ))}
           </div>
 
-          {/* Grid */}
           {filteredPosts.length > 0 ? (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredPosts.map(post => (
                 <Link href={`/blog/${post.slug}`} key={post.slug} className="block group h-full">
-                  <Card hoverable className="h-full flex flex-col p-0 overflow-hidden bg-bg-card border-border-subtle">
-                    <div className="relative h-56 w-full overflow-hidden">
-                      <div className="absolute inset-0 bg-accent-primary/20 transition-transform duration-500 group-hover:scale-105" />
+                  <article className="h-full flex flex-col rounded-2xl bg-white/[0.03] border border-white/[0.07] overflow-hidden hover:border-accent-primary/20 transition-colors">
+                    <div className="relative h-52 overflow-hidden">
                       {post.coverImage && (
-                        <img 
-                          src={post.coverImage.url} 
-                          alt={post.coverImage.alt || post.title} 
+                        <img
+                          src={post.coverImage.url}
+                          alt={post.coverImage.alt || post.title}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                         />
                       )}
-                      <div className="absolute top-4 left-4">
-                        <Badge variant="default" className="bg-bg-primary/80 backdrop-blur-md border-transparent text-accent-primary">
-                          {post.category}
-                        </Badge>
-                      </div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-bg-primary/80 to-transparent" />
+                      <span className="absolute top-4 left-4 rounded-full bg-bg-primary/80 backdrop-blur-md border border-white/10 px-3 py-1 text-xs font-medium text-accent-primary">
+                        {post.category}
+                      </span>
                     </div>
-                    
-                    <div className="p-6 flex flex-col flex-grow">
+
+                    <div className="flex flex-col flex-grow p-6">
                       <div className="flex items-center gap-4 text-xs text-text-muted mb-4">
-                        <div className="flex items-center gap-1">
+                        <span className="flex items-center gap-1">
                           <Calendar className="h-3 w-3" />
-                          <span>{formatDate(post.publishedAt)}</span>
-                        </div>
-                        <div className="flex items-center gap-1">
+                          {formatDate(post.publishedAt)}
+                        </span>
+                        <span className="flex items-center gap-1">
                           <Clock className="h-3 w-3" />
-                          <span>{post.readingTime} min</span>
-                        </div>
+                          {post.readingTime} min
+                        </span>
                       </div>
-                      
-                      <h2 className="text-xl font-display font-bold text-white mb-3 group-hover:text-accent-primary transition-colors">
+
+                      <h2 className="font-display text-lg font-bold text-white mb-3 leading-snug group-hover:text-accent-primary transition-colors line-clamp-2">
                         {post.title}
                       </h2>
-                      
-                      <p className="text-text-secondary text-sm leading-relaxed flex-grow">
+
+                      <p className="text-text-secondary text-sm leading-relaxed flex-grow line-clamp-3">
                         {post.excerpt}
                       </p>
-                      
-                      <div className="mt-6 flex items-center text-sm font-semibold text-accent-primary">
+
+                      <div className="mt-5 flex items-center gap-1.5 text-sm font-semibold text-accent-primary">
                         Lire l'article
-                        <ArrowRight className="ml-2 h-4 w-4 transform transition-transform group-hover:translate-x-1" />
+                        <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
                       </div>
                     </div>
-                  </Card>
+                  </article>
                 </Link>
               ))}
             </div>
           ) : (
             <div className="text-center py-20">
-              <p className="text-text-secondary text-lg">Aucun article trouvé pour cette catégorie.</p>
-              <Link href="/blog" className="text-accent-primary hover:underline mt-4 inline-block">Voir tous les articles</Link>
+              <p className="text-text-secondary text-lg mb-4">Aucun article trouvé pour cette catégorie.</p>
+              <Link href="/blog" className="text-accent-primary hover:text-white transition-colors text-sm font-medium">
+                Voir tous les articles
+              </Link>
             </div>
           )}
         </div>

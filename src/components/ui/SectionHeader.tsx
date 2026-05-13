@@ -1,6 +1,5 @@
 import { HTMLAttributes, forwardRef } from 'react'
 import { cn } from '@/lib/utils'
-import Badge from './Badge'
 
 export interface SectionHeaderProps extends HTMLAttributes<HTMLDivElement> {
   title: string
@@ -15,7 +14,7 @@ const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
       <div
         ref={ref}
         className={cn(
-          'flex flex-col gap-4',
+          'flex flex-col gap-5',
           {
             'items-center text-center': align === 'center',
             'items-start text-left': align === 'left',
@@ -25,15 +24,16 @@ const SectionHeader = forwardRef<HTMLDivElement, SectionHeaderProps>(
         {...props}
       >
         {badge && (
-          <Badge variant="pill" className="mb-2">
-            <span className="mr-2 text-accent-primary">●</span> {badge}
-          </Badge>
+          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-text-secondary">
+            <span className="h-1.5 w-1.5 rounded-full bg-accent-primary" />
+            {badge}
+          </span>
         )}
-        <h2 className="font-display text-3xl font-bold md:text-5xl">
+        <h2 className="font-body text-white text-3xl md:text-5xl font-semibold tracking-[-0.02em] leading-[1.1]">
           {title}
         </h2>
         {subtitle && (
-          <p className="max-w-2xl text-lg text-text-secondary">
+          <p className="max-w-2xl text-base md:text-lg text-text-secondary leading-relaxed">
             {subtitle}
           </p>
         )}

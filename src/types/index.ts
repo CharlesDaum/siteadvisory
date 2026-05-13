@@ -51,6 +51,7 @@ export interface Phase {
   description: string
   deliverables: string[]
   methods: string[]
+  outcome: string
 }
 
 /** Training format */
@@ -71,6 +72,10 @@ export interface Testimonial {
   company: string
   quote: string
   avatar?: string
+  /** Couleur d'accent pour le monogramme de l'entreprise (CSS color) */
+  companyColor?: string
+  /** Initiales affichées dans le badge entreprise (par défaut auto-générées) */
+  companyInitials?: string
 }
 
 /** Metric display item */

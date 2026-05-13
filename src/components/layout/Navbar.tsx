@@ -29,45 +29,61 @@ export default function Navbar() {
         animate={isScrolled ? 'scrolled' : 'top'}
         variants={navbarVariants}
         className={cn(
-          'fixed inset-x-0 top-0 z-40 flex h-20 items-center justify-between px-6 lg:px-12 transition-colors duration-300',
+          'fixed inset-x-0 top-0 z-40 h-20 transition-colors duration-300',
           isScrolled ? 'glass' : 'bg-transparent'
         )}
       >
-        <Link href="/" className="group flex items-center gap-2">
-          <span className="font-display text-xl font-bold tracking-tight text-white transition-colors group-hover:text-accent-primary">
-            NEXIA<span className="text-accent-primary group-hover:text-white">.</span>
-          </span>
-        </Link>
+        {/* Grid 3 colonnes : logo | nav centré | CTA */}
+        <div className="grid grid-cols-[1fr_auto_1fr] h-full items-center px-6 lg:px-12 gap-6">
+          {/* Logo — justifié à gauche */}
+          <div className="justify-self-start">
+            <Link href="/" className="group inline-flex items-center">
+              <span className="font-display text-xl font-bold tracking-tight text-white transition-colors group-hover:text-accent-primary">
+                NEXIA<span className="text-accent-primary group-hover:text-white">.</span>
+              </span>
+            </Link>
+          </div>
 
-        <nav className="hidden lg:block">
-          <ul className="flex items-center gap-8">
-            {NAV_ITEMS.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="text-sm font-medium text-text-secondary transition-colors hover:text-white"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </nav>
+          {/* Nav — strictement centré */}
+          <nav className="hidden lg:block justify-self-center">
+            <ul className="flex items-center gap-8">
+              {NAV_ITEMS.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="text-sm font-medium text-text-secondary transition-colors hover:text-white"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-        <div className="hidden lg:block">
-          <Link href="/contact">
-            <Button variant="primary" size="sm">
-              Démarrer →
-            </Button>
-          </Link>
+          {/* CTA — justifié à droite */}
+          <div className="hidden lg:flex items-center gap-4 justify-self-end">
+            <Link
+              href="/contact"
+              className="text-sm font-medium text-text-secondary transition-colors hover:text-white"
+            >
+              Contact
+            </Link>
+            <Link href="/contact">
+              <Button variant="primary" size="sm">
+                Consultation gratuite →
+              </Button>
+            </Link>
+          </div>
+
+          {/* Hamburger mobile — occupe la colonne droite sur petit écran */}
+          <button
+            className="lg:hidden justify-self-end rounded-full p-2 text-text-secondary hover:bg-white/5 hover:text-white col-start-3"
+            onClick={() => setIsMenuOpen(true)}
+            aria-label="Ouvrir le menu"
+          >
+            <Menu className="h-6 w-6" />
+          </button>
         </div>
-
-        <button
-          className="lg:hidden rounded-full p-2 text-text-secondary hover:bg-white/5 hover:text-white"
-          onClick={() => setIsMenuOpen(true)}
-        >
-          <Menu className="h-6 w-6" />
-        </button>
       </motion.header>
 
       <MobileMenu

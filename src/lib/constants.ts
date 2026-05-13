@@ -26,6 +26,7 @@ export const PHASES: Phase[] = [
     description: 'Audit complet de votre écosystème data, identification des opportunités IA à fort impact et évaluation de la maturité digitale de votre organisation.',
     deliverables: ['Rapport d\'audit complet', 'Matrice ROI/Faisabilité', 'Shortlist d\'opportunités prioritaires'],
     methods: ['Interviews parties prenantes', 'Analyse de l\'existant data', 'Benchmark sectoriel'],
+    outcome: 'Un rapport d\'audit prêt à être présenté à votre board, avec 5 à 10 opportunités IA prioritaires chiffrées et scorées.',
   },
   {
     number: '02',
@@ -34,6 +35,7 @@ export const PHASES: Phase[] = [
     description: 'Co-construction d\'une feuille de route IA alignée sur vos objectifs business, avec un business case détaillé pour chaque cas d\'usage.',
     deliverables: ['Feuille de route 12 mois', 'Business case par use case', 'Plan de gouvernance IA'],
     methods: ['Ateliers de co-construction', 'Scoring ROI/faisabilité', 'Priorisation stratégique'],
+    outcome: 'Une roadmap IA 12 mois validée par votre COMEX, avec un business case ROI pour chaque initiative.',
   },
   {
     number: '03',
@@ -42,6 +44,7 @@ export const PHASES: Phase[] = [
     description: 'Développement et mise en production de vos solutions IA avec une approche agile, des revues régulières et une documentation exhaustive.',
     deliverables: ['Agent IA en production', 'Documentation technique', 'Métriques de succès'],
     methods: ['Sprints agiles 2 semaines', 'Revues hebdomadaires', 'Tests & validation continue'],
+    outcome: 'Une solution IA en production, utilisée par vos équipes, avec un dashboard de KPIs et la documentation complète.',
   },
   {
     number: '04',
@@ -50,6 +53,7 @@ export const PHASES: Phase[] = [
     description: 'Accompagnement continu pour optimiser les performances, étendre les solutions à d\'autres départements et former vos équipes.',
     deliverables: ['Rapports de performance', 'Plan d\'expansion', 'Formation continue'],
     methods: ['Monitoring automatisé', 'Comités de pilotage mensuels', 'Amélioration continue'],
+    outcome: 'Des équipes internes autonomes qui font évoluer la solution sans dépendance externe, avec un ROI mesuré chaque trimestre.',
   },
 ]
 
@@ -200,19 +204,25 @@ export const TESTIMONIALS: Testimonial[] = [
   {
     name: 'Sophie Marchand',
     role: 'Directrice de la Transformation',
-    company: 'Groupe Industriel CAC 40',
+    company: 'Groupe Industriel · CAC 40',
+    companyInitials: 'CAC',
+    companyColor: '#14B8A6',
     quote: 'NexIA a transformé notre approche de l\'IA. En 3 mois, nous avons déployé 4 agents qui automatisent 60% de notre support client. Le ROI est spectaculaire.',
   },
   {
     name: 'Thomas Durand',
-    role: 'DSI',
-    company: 'ETI Services Financiers',
+    role: 'Directeur des Systèmes d\'Information',
+    company: 'ETI · Services Financiers',
+    companyInitials: 'ETI',
+    companyColor: '#F59E0B',
     quote: 'La rigueur méthodologique et la qualité des livrables sont au niveau des meilleurs cabinets de conseil. Mais avec une vraie expertise IA, pas du PowerPoint.',
   },
   {
     name: 'Claire Lefebvre',
-    role: 'DAF',
-    company: 'Scale-up SaaS B2B',
+    role: 'Directrice Administrative & Financière',
+    company: 'Scale-up · SaaS B2B',
+    companyInitials: 'SaaS',
+    companyColor: '#6366F1',
     quote: 'Le diagnostic initial a identifié des opportunités que nous n\'avions pas envisagées. L\'automatisation de notre réconciliation comptable nous fait gagner 2 jours par mois.',
   },
 ]
