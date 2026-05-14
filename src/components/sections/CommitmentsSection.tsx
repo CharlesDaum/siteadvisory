@@ -1,68 +1,57 @@
-'use client'
+import { COMMITMENTS } from '@/lib/site-data'
 
-import { motion } from 'framer-motion'
-import { ShieldCheck, Network, GraduationCap } from 'lucide-react'
-import SectionHeader from '@/components/ui/SectionHeader'
-import { staggerContainer, staggerItem } from '@/lib/animations'
-
-const COMMITMENTS = [
-  {
-    icon: Network,
-    title: 'Indépendance Technologique',
-    body: 'Aucun éditeur ne nous paye. Nous recommandons toujours la solution la plus adaptée à vos enjeux — OpenAI, Anthropic, Mistral ou open-source.',
-  },
-  {
-    icon: ShieldCheck,
-    title: 'Souveraineté & Sécurité',
-    body: 'Vos données restent les vôtres. Architectures Privacy by Design, RGPD natif, aucune donnée sensible exposée à des modèles publics.',
-  },
-  {
-    icon: GraduationCap,
-    title: 'Transfert de Compétences',
-    body: 'Notre objectif n\'est pas de vous rendre dépendants, mais autonomes. Chaque mission inclut un volet formation pour vos équipes.',
-  },
-]
+function GlyphSVG({ kind }: { kind: string }) {
+  const s = 'currentColor'
+  if (kind === 'network') return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={s} strokeWidth="1.4">
+      <circle cx="12" cy="6" r="2.5"/>
+      <circle cx="5" cy="18" r="2.5"/>
+      <circle cx="19" cy="18" r="2.5"/>
+      <path d="M12 8.5v3M10.5 16l-3.5-5.5M13.5 16l3.5-5.5"/>
+    </svg>
+  )
+  if (kind === 'shield') return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={s} strokeWidth="1.4">
+      <path d="M12 3 L20 6 V12 C20 17 16 20 12 21 C8 20 4 17 4 12 V6 Z"/>
+      <path d="M9 12 L11 14 L15 10"/>
+    </svg>
+  )
+  return (
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke={s} strokeWidth="1.4">
+      <path d="M2 9 L12 4 L22 9 L12 14 Z"/>
+      <path d="M6 11 V16 C6 17 9 19 12 19 C15 19 18 17 18 16 V11"/>
+    </svg>
+  )
+}
 
 export default function CommitmentsSection() {
   return (
-    <section className="py-28 relative overflow-hidden">
-      <div className="container mx-auto px-6">
-        <SectionHeader
-          badge="Nos Engagements"
-          title="Trois principes non négociables."
-          subtitle="Ce qui fait la différence quand vous travaillez avec NexIA Advisory."
-          align="center"
-          className="mb-16"
-        />
+    <section>
+      <div className="container">
+        <div className="section-head" data-reveal>
+          <span className="eyebrow">Engagements</span>
+          <div>
+            <h2 className="section-title">
+              Trois principes{' '}
+              <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>non négociables.</span>
+            </h2>
+            <p className="section-sub" style={{ marginTop: 20 }}>
+              Ces trois engagements guident chaque décision, chaque architecture et chaque livrable — sans exception.
+            </p>
+          </div>
+        </div>
 
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
-          className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto"
-        >
-          {COMMITMENTS.map((c) => {
-            const Icon = c.icon
-            return (
-              <motion.div
-                key={c.title}
-                variants={staggerItem}
-                className="flex flex-col gap-5 rounded-2xl bg-white/[0.03] border border-white/[0.07] p-8 hover:border-accent-primary/20 transition-colors"
-              >
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center bg-accent-primary/10 border border-accent-primary/20 text-accent-primary">
-                  <Icon className="h-6 w-6" />
-                </div>
-                <h3 className="font-body text-xl font-semibold text-white tracking-[-0.01em]">
-                  {c.title}
-                </h3>
-                <p className="text-text-secondary leading-relaxed text-sm">
-                  {c.body}
-                </p>
-              </motion.div>
-            )
-          })}
-        </motion.div>
+        <div className="commit-grid" data-reveal-stagger>
+          {COMMITMENTS.map((c) => (
+            <div className="commit-card" key={c.t}>
+              <div className="glyph" style={{ color: 'var(--accent)' }}>
+                <GlyphSVG kind={c.glyph} />
+              </div>
+              <h3>{c.t}</h3>
+              <p>{c.d}</p>
+            </div>
+          ))}
+        </div>
       </div>
     </section>
   )

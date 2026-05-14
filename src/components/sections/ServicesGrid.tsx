@@ -1,124 +1,190 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { SERVICES } from '@/lib/constants'
-import { ArrowRight, ArrowUpRight } from 'lucide-react'
-import * as Icons from 'lucide-react'
-import Link from 'next/link'
-import { staggerContainer, staggerItem } from '@/lib/animations'
+import { useState } from 'react'
+import { SERVICES, SERVICE_DEMOS } from '@/lib/site-data'
 
-interface ServicesGridProps {
-  preview?: boolean
+type AuditItem   = { l: string; v: string; t: number; accent?: boolean }
+type RoadmapQ    = { q: string; items: string[] }
+type LogRow      = { t: string; text: string }
+type CurrModule  = { l: string; d: string; for: string }
+type StackLayer  = { l: string }
+
+function ServicePreview({ id }: { id: string }) {
+  const demo = SERVICE_DEMOS[id]
+  if (!demo) return null
+
+  if (demo.kind === 'audit') {
+    const items = demo.items as AuditItem[]
+    return (
+      <div className="svc-preview">
+        <div className="svc-preview-head"><span>diagnostic.audit.scan</span><span className="pulse" /></div>
+        <div className="audit-rows">
+          {items.map((it, i) => (
+            <div key={i} className={`audit-row${it.accent ? ' accent' : ''}`} style={{ animationDelay: `${it.t}ms` }}>
+              <span className="dot" />
+              <span className="l">{it.l}</span>
+              <span className="v">{it.v}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (demo.kind === 'roadmap') {
+    const quarters = demo.quarters as RoadmapQ[]
+    return (
+      <div className="svc-preview">
+        <div className="svc-preview-head"><span>roadmap.12_mois.v3</span><span className="pulse" /></div>
+        <div className="roadmap-grid">
+          {quarters.map((q, i) => (
+            <div className="q-col" key={q.q} style={{ animationDelay: `${i * 120}ms` }}>
+              <div className="q-label">{q.q}</div>
+              {q.items.map((it) => <div className="q-item" key={it}>{it}</div>)}
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (demo.kind === 'agent') {
+    const log = demo.log as LogRow[]
+    return (
+      <div className="svc-preview">
+        <div className="svc-preview-head"><span>agent.runtime.live</span><span className="pulse" /></div>
+        <div className="log-rows">
+          {log.map((l, i) => (
+            <div className={`log-row r-${l.t}`} key={i} style={{ animationDelay: `${i * 380}ms` }}>
+              <span className="log-tag">{l.t.toUpperCase()}</span>
+              <span className="log-text">{l.text}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (demo.kind === 'flow') {
+    const nodes = demo.nodes as string[]
+    return (
+      <div className="svc-preview">
+        <div className="svc-preview-head"><span>workflow.auto.compta_v2</span><span className="pulse" /></div>
+        <div className="flow-nodes">
+          {nodes.map((n, i) => (
+            <span key={n}>
+              <div className="flow-node" style={{ animationDelay: `${i * 200}ms` }}>
+                <span className="flow-idx">0{i + 1}</span>{n}
+              </div>
+              {i < nodes.length - 1 && <div className="flow-arrow" style={{ animationDelay: `${i * 200 + 100}ms` }}>→</div>}
+            </span>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (demo.kind === 'curriculum') {
+    const modules = demo.modules as CurrModule[]
+    return (
+      <div className="svc-preview">
+        <div className="svc-preview-head"><span>programme.formation</span><span className="pulse" /></div>
+        <div className="curr-rows">
+          {modules.map((m, i) => (
+            <div className="curr-row" key={m.l} style={{ animationDelay: `${i * 140}ms` }}>
+              <div className="curr-num">M.0{i + 1}</div>
+              <div>
+                <div className="curr-l">{m.l}</div>
+                <div className="curr-meta">{m.d} · pour {m.for}</div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  if (demo.kind === 'stack') {
+    const layers = demo.layers as StackLayer[]
+    return (
+      <div className="svc-preview">
+        <div className="svc-preview-head"><span>solution.stack.custom</span><span className="pulse" /></div>
+        <div className="stack-layers">
+          {layers.map((l, i) => (
+            <div className="stack-layer" key={l.l} style={{ animationDelay: `${i * 120}ms` }}>
+              <span className="stack-idx">L{layers.length - i}</span>
+              {l.l}
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  return null
 }
 
-export default function ServicesGrid({ preview = false }: ServicesGridProps) {
-  const displayedServices = preview ? SERVICES.slice(0, 6) : SERVICES
+export default function ServicesGrid() {
+  const [active, setActive] = useState(SERVICES[0].n)
+  const current = SERVICES.find((s) => s.n === active)!
 
   return (
-    <section className="py-28 relative overflow-hidden">
-      <div className="container mx-auto px-6">
-        {/* Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mb-16 max-w-3xl"
-        >
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-text-secondary mb-5">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-primary" />
-            Nos Solutions
-          </span>
-          <h2 className="font-body text-4xl font-semibold text-white md:text-5xl tracking-[-0.02em] leading-[1.1] mb-4">
-            De la stratégie au déploiement,{' '}
-            <span className="italic font-normal text-accent-primary">nous couvrons tout.</span>
-          </h2>
-          <p className="text-text-secondary text-lg leading-relaxed">
-            Six offres structurées pour vous accompagner à chaque étape de votre
-            transformation IA — sans dispersion, sans sur-promesse.
-          </p>
-        </motion.div>
+    <section id="services">
+      <div className="container">
+        <div className="section-head" data-reveal>
+          <span className="eyebrow">Services</span>
+          <div>
+            <h2 className="section-title">
+              Six façons de mettre l&apos;IA{' '}
+              <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>en production.</span>
+            </h2>
+            <p className="section-sub" style={{ marginTop: 20 }}>
+              Chaque service est livré par un consultant senior, avec délivrables actionnables,
+              KPIs mesurés et transfert de compétences intégré.
+            </p>
+          </div>
+        </div>
 
-        {/* Grid */}
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, margin: '-50px' }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5"
-        >
-          {displayedServices.map((service) => {
-            // @ts-ignore
-            const Icon = Icons[service.icon] || Icons.Star
+        <div data-reveal>
+          <div className="services-explorer">
+            <div className="svc-list" role="tablist">
+              {SERVICES.map((s) => (
+                <button
+                  key={s.n}
+                  role="tab"
+                  aria-selected={s.n === active}
+                  className={`svc-tab${s.n === active ? ' active' : ''}`}
+                  onClick={() => setActive(s.n)}
+                  onMouseEnter={() => setActive(s.n)}
+                >
+                  <span className="svc-tab-num">{s.n}</span>
+                  <span className="svc-tab-title">{s.t}</span>
+                  <span className="svc-tab-arrow">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                      <path d="M5 12h14M13 5l7 7-7 7" />
+                    </svg>
+                  </span>
+                </button>
+              ))}
+            </div>
 
-            return (
-              <motion.div variants={staggerItem} key={service.slug} className="h-full">
-                <Link href={`/services/${service.slug}`} className="block h-full group">
-                  <article className="relative h-full flex flex-col rounded-2xl bg-gradient-to-br from-white/[0.04] to-white/[0.01] border border-white/[0.08] p-8 overflow-hidden transition-all duration-500 hover:border-accent-primary/30 hover:from-white/[0.06] hover:to-white/[0.02] hover:-translate-y-1">
-
-                    {/* Halo teal au hover (coin haut droit) */}
-                    <div className="absolute -top-16 -right-16 w-48 h-48 rounded-full bg-accent-primary/8 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-
-                    {/* Flèche externe en haut à droite */}
-                    <ArrowUpRight className="absolute top-8 right-8 h-5 w-5 text-text-muted z-10 transition-all duration-300 group-hover:text-accent-primary group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
-
-                    {/* Icône — grande et prominente */}
-                    <div className="mb-7 w-16 h-16 rounded-2xl flex items-center justify-center bg-gradient-to-br from-accent-primary/20 to-accent-primary/[0.03] border border-accent-primary/25 text-accent-primary relative z-10 transition-transform duration-300 group-hover:scale-105">
-                      <Icon className="h-8 w-8" strokeWidth={1.5} />
-                    </div>
-
-                    {/* Titre */}
-                    <h3 className="font-body text-2xl font-semibold text-white tracking-[-0.02em] mb-3 leading-tight relative z-10">
-                      {service.title}
-                    </h3>
-
-                    {/* Description */}
-                    <p className="text-sm text-text-secondary leading-relaxed flex-grow mb-6 relative z-10">
-                      {service.shortDesc}
-                    </p>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-1.5 mb-7 relative z-10">
-                      {service.tags.map((tag) => (
-                        <span
-                          key={tag}
-                          className="text-xs px-2.5 py-1 rounded-full bg-white/[0.04] text-text-muted border border-white/[0.06] group-hover:border-accent-primary/20 group-hover:text-text-secondary transition-colors"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    {/* Bottom CTA */}
-                    <div className="flex items-center gap-2 pt-6 border-t border-white/[0.05] relative z-10">
-                      <span className="text-sm font-medium text-accent-primary transition-colors">
-                        Voir le détail
-                      </span>
-                      <ArrowRight className="h-4 w-4 text-accent-primary transition-transform duration-300 group-hover:translate-x-1.5" />
-                    </div>
-                  </article>
-                </Link>
-              </motion.div>
-            )
-          })}
-        </motion.div>
-
-        {/* Bottom link to all services */}
-        {preview && (
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            className="mt-12 flex justify-center"
-          >
-            <Link
-              href="/services"
-              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-sm font-medium text-text-secondary hover:text-white hover:border-white/20 hover:bg-white/[0.08] transition-all"
-            >
-              Voir toutes nos solutions
-              <ArrowRight className="h-4 w-4" />
-            </Link>
-          </motion.div>
-        )}
+            <div className="svc-detail" key={active}>
+              <div className="svc-detail-meta">
+                <span className="label">SERVICE / {current.n}</span>
+                <span className="label" style={{ color: 'var(--accent)' }}>{current.duration}</span>
+              </div>
+              <h3 className="svc-detail-title">{current.t}</h3>
+              <p className="svc-detail-desc">{current.d}</p>
+              <div style={{ display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 24 }}>
+                {current.tags.map((t) => <span className="tag" key={t}>{t}</span>)}
+              </div>
+              <ServicePreview id={current.n} />
+              <a href="#contact" className="btn primary" style={{ marginTop: 28 }}>
+                Démarrer ce service <span className="arrow">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   )

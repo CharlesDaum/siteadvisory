@@ -16,11 +16,11 @@ export default function ServicesPage() {
         badge="Nos Solutions"
         title="L'IA Sur-Mesure"
         titleAccent="pour votre Croissance"
-        subtitle="Six offres structurées pour vous accompagner de la réflexion stratégique au déploiement technique — sans sur-promesse, avec des résultats mesurables à chaque étape."
+        subtitle="Six offres calibrées pour chaque étape de votre maturité IA — du premier diagnostic à la solution propriétaire en production. Chaque livrable est tangible, chaque KPI est mesuré."
         align="center"
       />
 
-      <ServicesGrid preview={false} />
+      <ServicesGrid />
 
       <section className="py-24">
         <div className="container mx-auto px-6">
@@ -41,10 +41,11 @@ export default function ServicesPage() {
               </thead>
               <tbody className="divide-y divide-white/[0.05]">
                 {[
-                  ['Focus métier & Stratégique', 'Expertise native IA & Business', 'Focus technique IT traditionnel'],
-                  ['Temps de déploiement', 'En semaines (MVP & Agile)', 'En mois ou années'],
-                  ['Indépendance solutions', 'Agnostique multi-LLM', 'Souvent liés à des éditeurs'],
-                  ['Transparence & ROI', 'Matrice ROI validée avant tout dev', 'Effet tunnel fréquent'],
+                  ['Positionnement', 'Spécialiste IA pure player', 'Généraliste IT rebadgé IA'],
+                  ['Profils en mission', 'Seniors uniquement, zéro junior', 'Profils mixtes, juniors fréquents'],
+                  ['Délai de mise en production', 'En semaines — MVP agile garanti', 'En mois, souvent en années'],
+                  ['Indépendance technologique', 'Agnostique — aucun partenariat éditeur', 'Souvent liés à des éditeurs'],
+                  ['Transparence ROI', 'Business case validé avant tout développement', 'Effet tunnel, ROI rarement mesuré'],
                 ].map(([criteria, nexia, esn]) => (
                   <tr key={criteria}>
                     <td className="p-4 md:p-6 text-text-primary text-sm">{criteria}</td>

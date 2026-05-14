@@ -1,6 +1,6 @@
 'use client'
 
-import { forwardRef, useState, MouseEvent } from 'react'
+import { forwardRef, useState, MouseEvent, ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 import { motion, HTMLMotionProps, useMotionTemplate, useMotionValue } from 'framer-motion'
 import { cardHover } from '@/lib/animations'
@@ -8,6 +8,7 @@ import { cardHover } from '@/lib/animations'
 export interface CardProps extends HTMLMotionProps<"div"> {
   hoverable?: boolean
   glass?: boolean
+  children?: ReactNode
 }
 
 const Card = forwardRef<HTMLDivElement, CardProps>(

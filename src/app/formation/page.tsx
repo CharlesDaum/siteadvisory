@@ -18,7 +18,7 @@ export default function FormationPage() {
         badge="Nexia Academy"
         title="Accélérez l'adoption de l'IA"
         titleAccent="par vos équipes"
-        subtitle="L'outil ne fait pas tout. Pour tirer une réelle valeur de l'IA, l'acculturation et la montée en compétence de vos collaborateurs sont indispensables. Formats adaptés à chaque niveau de maturité."
+        subtitle="La meilleure solution IA ne vaut rien si vos équipes ne s'en emparent pas. Nos programmes pratiques transforment le scepticisme en adoption — en 1 à 3 jours, sur vos cas d'usage réels."
         align="center"
       />
 

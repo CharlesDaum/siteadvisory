@@ -1,123 +1,164 @@
 'use client'
 
-import { motion } from 'framer-motion'
-import { ArrowRight, ChevronDown, Clock, ShieldCheck, FileText } from 'lucide-react'
-import Link from 'next/link'
-import { staggerContainer, staggerItem } from '@/lib/animations'
-import Button from '@/components/ui/Button'
+import { useState, useEffect } from 'react'
+import Counter from '@/components/ui/Counter'
+import MagneticButton from '@/components/ui/MagneticButton'
+import { METRICS } from '@/lib/site-data'
 
-const TRUST_ITEMS = [
-  { value: '+120', label: 'projets déployés' },
-  { value: '€2.4M', label: 'de ROI généré' },
-  { value: '98%', label: 'satisfaction client' },
-  { value: '< 8 sem.', label: 'délai moyen de prod.' },
-]
+const SCRIPT = {
+  user: "Quel est le pourcentage moyen de POC IA qui n'atteignent jamais la production en France ?",
+  bot:  "D'après Gartner 2024, 73% des projets IA restent bloqués en POC. Le levier principal d'échec est l'absence de méthodologie de mise en production.",
+  src:  ['Gartner.2024', 'McKinsey.AI', 'NexIA.audit'],
+}
 
-const GUARANTEES = [
-  { icon: Clock, label: 'Réponse sous 24h' },
-  { icon: ShieldCheck, label: 'NDA sur demande' },
-  { icon: FileText, label: 'Consultation gratuite' },
-]
+function AgentDemo() {
+  const [step, setStep] = useState(0)
+  const [userTyped, setUserTyped] = useState('')
+  const [botTyped, setBotTyped] = useState('')
+
+  useEffect(() => {
+    let t1: ReturnType<typeof setTimeout>
+    let t2: ReturnType<typeof setTimeout>
+
+    const run = () => {
+      setUserTyped('')
+      setBotTyped('')
+      setStep(0)
+      const u = SCRIPT.user
+      let i = 0
+      const typeUser = () => {
+        if (i <= u.length) {
+          setUserTyped(u.slice(0, i))
+          i++
+          t1 = setTimeout(typeUser, 22 + Math.random() * 28)
+        } else {
+          setStep(1)
+          t2 = setTimeout(() => {
+            setStep(2)
+            const b = SCRIPT.bot
+            let j = 0
+            const typeBot = () => {
+              if (j <= b.length) {
+                setBotTyped(b.slice(0, j))
+                j++
+                t1 = setTimeout(typeBot, 14 + Math.random() * 22)
+              } else {
+                setStep(3)
+                t2 = setTimeout(run, 5000)
+              }
+            }
+            typeBot()
+          }, 700)
+        }
+      }
+      typeUser()
+    }
+
+    run()
+    return () => { clearTimeout(t1); clearTimeout(t2) }
+  }, [])
+
+  return (
+    <div className="agent">
+      <div className="agent-head">
+        <div className="dots"><span /><span /><span /></div>
+        <div className="title">Agent.NexIA · RAG.audit_v3</div>
+        <div className="pulse" />
+      </div>
+      <div className="agent-body">
+        <div className="agent-msg user">
+          <span>{userTyped}</span>
+          {step === 0 && <span className="cursor" />}
+        </div>
+        {step >= 2 && (
+          <div className="agent-msg bot">
+            <span>{botTyped}</span>
+            {step === 2 && <span className="cursor" />}
+            {step === 3 && (
+              <div className="src">
+                {SCRIPT.src.map((s) => <span key={s}>{s}</span>)}
+              </div>
+            )}
+          </div>
+        )}
+      </div>
+      <div className="agent-foot">
+        <div className="field">Posez une question à votre data…</div>
+        <button className="send" aria-label="send">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  )
+}
 
 export default function HeroSection() {
   return (
-    <section className="relative flex min-h-[90vh] flex-col items-center justify-center overflow-hidden pt-32 pb-24">
-      <motion.div
-        variants={staggerContainer}
-        initial="hidden"
-        animate="visible"
-        className="container relative z-10 mx-auto flex flex-col items-center px-6 text-center"
-      >
-        {/* Badge */}
-        <motion.div variants={staggerItem} className="mb-10">
-          <span className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-4 py-1.5 text-xs font-medium uppercase tracking-[0.2em] text-text-secondary backdrop-blur-sm">
-            <span className="h-1.5 w-1.5 rounded-full bg-accent-primary" />
-            Cabinet de conseil spécialisé IA · Paris
-          </span>
-        </motion.div>
-
-        {/* Headline */}
-        <motion.h1
-          variants={staggerItem}
-          className="mx-auto max-w-4xl font-body text-white tracking-[-0.03em] leading-[1.05] text-5xl sm:text-6xl md:text-7xl lg:text-[5.25rem] font-semibold"
-        >
-          L'IA qui livre{' '}
-          <span className="italic font-normal text-accent-primary">vraiment</span>{' '}
-          des résultats.
-        </motion.h1>
-
-        {/* Subheadline */}
-        <motion.p
-          variants={staggerItem}
-          className="mx-auto mt-8 max-w-2xl text-lg leading-relaxed text-text-secondary md:text-xl"
-        >
-          De l'audit stratégique au déploiement en production, nous transformons
-          vos données en avantage compétitif — avec la rigueur d'un cabinet
-          et la profondeur technique d'un studio IA.
-        </motion.p>
-
-        {/* CTA unique fort */}
-        <motion.div variants={staggerItem} className="mt-12">
-          <Link href="/contact">
-            <Button variant="primary" size="lg" className="group h-14 px-8 text-base">
-              Obtenir une consultation gratuite
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-            </Button>
-          </Link>
-        </motion.div>
-
-        {/* Garanties inline — bien visibles près du CTA */}
-        <motion.div
-          variants={staggerItem}
-          className="mt-6 flex flex-wrap items-center justify-center gap-x-6 gap-y-2"
-        >
-          {GUARANTEES.map((item) => {
-            const Icon = item.icon
-            return (
-              <div key={item.label} className="flex items-center gap-2">
-                <Icon className="h-4 w-4 text-accent-primary" strokeWidth={2} />
-                <span className="text-sm font-medium text-text-primary">{item.label}</span>
-              </div>
-            )
-          })}
-        </motion.div>
-
-        {/* Lien secondaire discret */}
-        <motion.div variants={staggerItem} className="mt-8">
-          <Link
-            href="/cas-usage"
-            className="text-sm text-text-muted hover:text-text-secondary transition-colors inline-flex items-center gap-1.5 group"
-          >
-            Ou explorez nos cas d'usage concrets
-            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-          </Link>
-        </motion.div>
-
-        {/* Stats */}
-        <motion.div variants={staggerItem} className="mt-24 w-full max-w-4xl">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-x-8 gap-y-10">
-            {TRUST_ITEMS.map((item, idx) => (
-              <div key={idx} className="flex flex-col items-center gap-1">
-                <span className="font-display text-3xl md:text-4xl font-bold text-white tracking-tight">
-                  {item.value}
-                </span>
-                <span className="text-xs text-text-muted text-center uppercase tracking-widest">
-                  {item.label}
-                </span>
-              </div>
-            ))}
+    <section className="hero" id="top">
+      <div className="bg-grid" />
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
+        <div className="hero-top" data-reveal>
+          <span className="eyebrow">Cabinet IA · Paris</span>
+          <div className="hero-meta">
+            <div><strong>2026.05</strong> — Bookings ouverts Q3</div>
+            <div>48.8566° N · 2.3522° E</div>
           </div>
-        </motion.div>
-      </motion.div>
+        </div>
 
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, y: [0, 6, 0] }}
-        transition={{ delay: 1.5, duration: 2, repeat: Infinity }}
-        className="absolute bottom-6 z-10 flex flex-col items-center gap-1 text-text-muted"
-      >
-        <ChevronDown className="h-4 w-4" />
-      </motion.div>
+        <h1>
+          <span className="word-reveal"><span>L'IA qui livre</span></span>{' '}
+          <span className="word-reveal"><span><em>vraiment</em></span></span>{' '}
+          <span className="word-reveal"><span>des résultats.</span></span>
+        </h1>
+
+        <div className="hero-grid">
+          <div data-reveal>
+            <p className="hero-lede">
+              Du diagnostic stratégique au premier agent déployé : nous construisons
+              des solutions IA mesurables sur vos KPIs — sans POC orphelin,
+              sans junior en mission, sans dépendance technologique.
+            </p>
+            <div className="hero-cta-row">
+              <MagneticButton primary href="#contact">
+                Consultation gratuite
+                <span className="arrow">→</span>
+              </MagneticButton>
+              <MagneticButton href="#cas-usage">
+                Voir les cas d'usage
+              </MagneticButton>
+            </div>
+            <div className="hero-guarantees">
+              <span className="g"><span className="dot" />Réponse sous 24h</span>
+              <span className="g"><span className="dot" />NDA sur demande</span>
+              <span className="g"><span className="dot" />Consultation gratuite</span>
+            </div>
+          </div>
+
+          <div data-reveal style={{ transitionDelay: '0.2s' }}>
+            <div className="agent-slot">
+              <AgentDemo />
+            </div>
+          </div>
+        </div>
+
+        <div className="hero-strip" data-reveal-stagger>
+          {METRICS.map((m, i) => (
+            <div className="cell" key={i}>
+              <div className="v">
+                <Counter
+                  value={m.v}
+                  prefix={'prefix' in m ? m.prefix : ''}
+                  suffix={'suffix' in m ? m.suffix : ''}
+                  decimals={'decimals' in m ? m.decimals : 0}
+                />
+              </div>
+              <div className="l">{m.l}</div>
+            </div>
+          ))}
+        </div>
+      </div>
     </section>
   )
 }

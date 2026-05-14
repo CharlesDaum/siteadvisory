@@ -18,11 +18,11 @@ export default function ApprochePage() {
         badge="Méthodologie"
         title="De la vision"
         titleAccent="à l'impact réel."
-        subtitle="Notre méthode rigoureuse en 4 phases sécurise votre investissement et transforme chaque initiative IA en résultat mesurable — du diagnostic jusqu'au déploiement en production."
+        subtitle="Une méthodologie en 4 phases construite à partir de 120+ déploiements en production. Chaque phase a des livrables précis, des KPIs mesurés et un transfert de compétences intégré."
         align="center"
       />
 
-      <ApproacheTimeline preview={false} />
+      <ApproacheTimeline />
       <CommitmentsSection />
       <FAQSection items={FAQ_APPROCHE} />
       <ContactCTA />

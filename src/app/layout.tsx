@@ -1,73 +1,57 @@
 import type { Metadata } from 'next'
-import { Syne, DM_Sans, JetBrains_Mono } from 'next/font/google'
+import { Instrument_Serif, Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import { ThemeProvider } from '@/components/layout/ThemeProvider'
 import Navbar from '@/components/layout/Navbar'
-import Footer from '@/components/layout/Footer'
-import AmbientBackground from '@/components/layout/AmbientBackground'
+import SiteFooter from '@/components/layout/SiteFooter'
 
-const syne = Syne({
+const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
-  variable: '--font-syne',
-  weight: ['600', '700', '800'],
+  variable: '--font-instrument-serif',
+  weight: '400',
+  style: ['normal', 'italic'],
 })
 
-const dmSans = DM_Sans({
+const geist = Geist({
   subsets: ['latin'],
-  variable: '--font-dm-sans',
-  weight: ['300', '400', '500', '600'],
+  variable: '--font-geist',
+  weight: ['300', '400', '500', '600', '700'],
 })
 
-const jetbrains = JetBrains_Mono({
+const geistMono = Geist_Mono({
   subsets: ['latin'],
-  variable: '--font-jetbrains',
+  variable: '--font-geist-mono',
   weight: ['400', '500'],
 })
 
 export const metadata: Metadata = {
   title: {
-    default: 'NexIA Advisory — Conseil en Intelligence Artificielle',
+    default: 'NexIA Advisory — Cabinet IA Paris',
     template: '%s | NexIA Advisory',
   },
   description:
-    "Cabinet de conseil IA premium. Nous transformons l'IA en moteur de croissance durable pour les entreprises ambitieuses.",
-  keywords: [
-    'conseil IA',
-    'intelligence artificielle',
-    'transformation digitale',
-    'LLM',
-    'automatisation',
-  ],
+    "Cabinet de conseil spécialisé en intelligence artificielle. De l'audit stratégique au déploiement en production, nous transformons vos données en avantage compétitif.",
+  keywords: ['conseil IA', 'intelligence artificielle', 'LLM', 'RAG', 'automatisation', 'Paris'],
   openGraph: {
     type: 'website',
     locale: 'fr_FR',
     url: 'https://nexia-advisory.fr',
     siteName: 'NexIA Advisory',
-    images: [{ url: '/images/og-image.jpg', width: 1200, height: 630 }],
   },
   robots: { index: true, follow: true },
   authors: [{ name: 'NexIA Advisory' }],
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html
       lang="fr"
       suppressHydrationWarning
-      className={`${syne.variable} ${dmSans.variable} ${jetbrains.variable}`}
+      className={`${instrumentSerif.variable} ${geist.variable} ${geistMono.variable}`}
     >
-      <body className="noise-overlay relative flex min-h-screen flex-col font-body text-text-primary antialiased overflow-x-hidden bg-transparent">
-        <AmbientBackground />
-
-        <ThemeProvider attribute="class" defaultTheme="dark" forcedTheme="dark">
-          <Navbar />
-          <main className="flex-1 relative z-0">{children}</main>
-          <Footer />
-        </ThemeProvider>
+      <body className="grain">
+        <Navbar />
+        <main>{children}</main>
+        <SiteFooter />
       </body>
     </html>
   )

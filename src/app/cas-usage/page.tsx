@@ -19,7 +19,7 @@ export default function CasUsagePage() {
         align="center"
       />
 
-      <CasUsageGrid preview={false} />
+      <CasUsageGrid />
 
       <ContactCTA />
     </>
