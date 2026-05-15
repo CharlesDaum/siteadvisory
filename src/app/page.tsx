@@ -12,6 +12,7 @@ import ProblemSection from '@/components/sections/ProblemSection'
 import CasUsageGrid from '@/components/sections/CasUsageGrid'
 import CommitmentsSection from '@/components/sections/CommitmentsSection'
 import ContactCTA from '@/components/sections/ContactCTA'
+import EvidenceSection from '@/components/sections/EvidenceSection'
 
 export default function HomePage() {
   useReveal()
@@ -24,6 +25,7 @@ export default function HomePage() {
       <ServicesGrid />
       <LLMAgentsDiagram />
       <ApproacheTimeline />
+      <EvidenceSection />
       <ProblemSection />
       <CasUsageGrid />
       <CommitmentsSection />

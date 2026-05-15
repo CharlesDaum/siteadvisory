@@ -10,11 +10,17 @@ export default function ScrollStatSection() {
     const container = containerRef.current
     if (!container) return
 
+    let rafPending = false
     const onScroll = () => {
-      const rect = container.getBoundingClientRect()
-      const totalScroll = container.offsetHeight - window.innerHeight
-      const scrolled = -rect.top
-      setProgress(Math.max(0, Math.min(1, scrolled / totalScroll)))
+      if (rafPending) return
+      rafPending = true
+      requestAnimationFrame(() => {
+        const rect = container.getBoundingClientRect()
+        const totalScroll = container.offsetHeight - window.innerHeight
+        const scrolled = -rect.top
+        setProgress(Math.max(0, Math.min(1, scrolled / totalScroll)))
+        rafPending = false
+      })
     }
 
     window.addEventListener('scroll', onScroll, { passive: true })

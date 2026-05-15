@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Counter from '@/components/ui/Counter'
 import MagneticButton from '@/components/ui/MagneticButton'
 import { METRICS } from '@/lib/site-data'
@@ -15,18 +15,24 @@ function AgentDemo() {
   const [step, setStep] = useState(0)
   const [userTyped, setUserTyped] = useState('')
   const [botTyped, setBotTyped] = useState('')
+  const containerRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     let t1: ReturnType<typeof setTimeout>
     let t2: ReturnType<typeof setTimeout>
+    let alive = true
+
+    const stop = () => { alive = false; clearTimeout(t1); clearTimeout(t2) }
 
     const run = () => {
+      if (!alive) return
       setUserTyped('')
       setBotTyped('')
       setStep(0)
       const u = SCRIPT.user
       let i = 0
       const typeUser = () => {
+        if (!alive) return
         if (i <= u.length) {
           setUserTyped(u.slice(0, i))
           i++
@@ -34,10 +40,12 @@ function AgentDemo() {
         } else {
           setStep(1)
           t2 = setTimeout(() => {
+            if (!alive) return
             setStep(2)
             const b = SCRIPT.bot
             let j = 0
             const typeBot = () => {
+              if (!alive) return
               if (j <= b.length) {
                 setBotTyped(b.slice(0, j))
                 j++
@@ -54,12 +62,22 @@ function AgentDemo() {
       typeUser()
     }
 
+    const el = containerRef.current
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !alive) { alive = true; run() }
+        else if (!entry.isIntersecting) stop()
+      },
+      { threshold: 0.1 }
+    )
+    if (el) io.observe(el)
     run()
-    return () => { clearTimeout(t1); clearTimeout(t2) }
+
+    return () => { io.disconnect(); stop() }
   }, [])
 
   return (
-    <div className="agent">
+    <div className="agent" ref={containerRef}>
       <div className="agent-head">
         <div className="dots"><span /><span /><span /></div>
         <div className="title">Agent.NexIA · RAG.audit_v3</div>
