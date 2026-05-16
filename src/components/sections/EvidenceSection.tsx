@@ -85,9 +85,7 @@ export default function EvidenceSection() {
               <p className="stat-body">{s.body}</p>
               <div className="evidence-source" style={{ paddingTop: 20, borderTop: '1px solid var(--line)', marginTop: 8 }}>
                 <span className="evidence-dot" style={{ background: s.colorHex }} />
-                <a href={s.sourceUrl} target="_blank" rel="noopener noreferrer" className="evidence-source-link">
-                  {s.source}
-                </a>
+                <span className="evidence-source-link">{s.source}</span>
               </div>
             </div>
           </div>
