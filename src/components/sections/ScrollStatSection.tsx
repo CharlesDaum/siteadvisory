@@ -41,6 +41,7 @@ export default function ScrollStatSection() {
     <div ref={containerRef} className="scroll-stat-container">
       <div className="scroll-stat-stage">
         <div className="scroll-stat-bg" />
+        <div className="bg-grid" />
         <div className="scroll-stat-content">
           <div
             className="scroll-stat-num"

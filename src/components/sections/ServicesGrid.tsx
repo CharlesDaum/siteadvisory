@@ -8,26 +8,42 @@ type RoadmapQ    = { q: string; items: string[] }
 type LogRow      = { t: string; text: string }
 type CurrModule  = { l: string; d: string; for: string }
 type StackLayer  = { l: string }
+type MatrixPrisme = { key: string; desc: string }
+type MatrixPoint  = { t: string; d: string }
 
 function ServicePreview({ id }: { id: string }) {
   const demo = SERVICE_DEMOS[id]
   if (!demo) return null
 
-  if (demo.kind === 'audit') {
-    const items = demo.items as AuditItem[]
+  if (demo.kind === 'matrix') {
+    const prismes = demo.prismes as MatrixPrisme[]
+    const points  = demo.points  as MatrixPoint[]
     return (
-      <div className="svc-preview">
-        <div className="svc-preview-head"><span>diagnostic.audit.scan</span><span className="pulse" /></div>
-        <div className="audit-rows">
-          {items.map((it, i) => (
-            <div key={i} className={`audit-row${it.accent ? ' accent' : ''}`} style={{ animationDelay: `${it.t}ms` }}>
-              <span className="dot" />
-              <span className="l">{it.l}</span>
-              <span className="v">{it.v}</span>
+      <>
+        <div className="svc-preview">
+          <div className="svc-preview-head"><span className="pulse" /></div>
+          <div className="matrix-terminal">
+            {prismes.map((p, i) => (
+              <div key={i} className="matrix-line" style={{ animationDelay: `${i * 140}ms` }}>
+                <span className="matrix-key">{p.key}</span>
+                <span className="matrix-arrow"> → </span>
+                <span className="matrix-desc">{p.desc}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <div className="matrix-points">
+          {points.map((p, i) => (
+            <div key={i} className="matrix-point" style={{ animationDelay: `${i * 100 + 560}ms` }}>
+              <span className="matrix-point-num">0{i + 1}</span>
+              <div>
+                <strong>{p.t}</strong>
+                <p>{p.d}</p>
+              </div>
             </div>
           ))}
         </div>
-      </div>
+      </>
     )
   }
 
@@ -130,7 +146,8 @@ export default function ServicesGrid() {
 
   return (
     <section id="services">
-      <div className="container">
+      <div className="bg-grid" />
+      <div className="container" style={{ position: 'relative', zIndex: 1 }}>
         <div className="section-head" data-reveal>
           <span className="eyebrow">Services</span>
           <div>
@@ -180,7 +197,7 @@ export default function ServicesGrid() {
               </div>
               <ServicePreview id={current.n} />
               <a href="#contact" className="btn primary" style={{ marginTop: 28 }}>
-                Démarrer ce service <span className="arrow">→</span>
+                {(current as { cta?: string }).cta ?? 'Démarrer ce service'} <span className="arrow">→</span>
               </a>
             </div>
           </div>

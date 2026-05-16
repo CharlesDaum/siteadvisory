@@ -26,8 +26,8 @@ export default function TestimonialsSection() {
           <span className="eyebrow">Témoignages</span>
           <div>
             <h2 className="section-title">
-              Ce que disent les dirigeants{' '}
-              <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>qui nous font confiance.</span>
+              Ils ont arrêté les expérimentations{' '}
+              <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>Ils ont mis l'IA en production.</span>
             </h2>
           </div>
         </div>

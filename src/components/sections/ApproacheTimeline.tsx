@@ -73,7 +73,7 @@ function PhaseSegment({
           </div>
         </div>
       </motion.div>
-      <div ref={spacerRef} style={{ height: isLast ? 0 : '10vh' }} />
+      <div ref={spacerRef} style={{ height: '10vh' }} />
     </>
   )
 }

@@ -39,7 +39,7 @@ export const DIFFERENTIATORS = [
 ]
 
 export const SERVICES = [
-  { n: '01', t: 'Diagnostic Data & IA', d: "Cartographie de votre maturité data et shortlist des 5 à 10 opportunités IA à fort ROI, livrée en 2 semaines, chiffrée et priorisée.", tags: ['Audit', 'Quick Win', 'Faisabilité'], duration: '2 semaines' },
+  { n: '01', t: 'Audit Stratégique & Diagnostic IA', d: "Évaluation complète de votre maturité data et de votre posture de conformité. Nous ciblons vos quick wins pour structurer une roadmap de déploiement claire, sécurisée et actionnable.", tags: ['Audit Data', 'Besoin métier', 'Conformité (AI Act)', 'Roadmap IA', 'Quick Wins'], duration: '2 semaines', cta: 'Planifier mon audit stratégique' },
   { n: '02', t: 'Stratégie & Roadmap IA', d: "Roadmap IA 12 mois avec business case chiffré par cas d'usage, co-construite avec votre COMEX et prête à exécuter.", tags: ['Stratégie', 'Gouvernance', 'Roadmap'], duration: '1 semaine' },
   { n: '03', t: 'Agents IA intelligents', d: "Agents IA connectés à vos données internes, déployés en production avec monitoring continu. Support client, assistant métier, analyse documentaire.", tags: ['LLM', 'RAG', 'Chatbot'], duration: '4–8 sem.' },
   { n: '04', t: 'Automatisation intelligente', d: "Identification et suppression de vos goulots d'étranglement manuels. Vos équipes se concentrent sur les décisions, l'IA gère le reste.", tags: ['Workflow', 'API', 'RPA'], duration: '4–12 sem.' },
@@ -49,12 +49,18 @@ export const SERVICES = [
 
 export const SERVICE_DEMOS: Record<string, { kind: string; [key: string]: unknown }> = {
   '01': {
-    kind: 'audit',
-    items: [
-      { l: 'Sources data scannées', v: '14 systèmes', t: 230 },
-      { l: 'Opportunités identifiées', v: '8 cas', t: 760 },
-      { l: 'ROI annuel estimé', v: '€ 420k', t: 1280, accent: true },
-      { l: 'Quick wins (< 4 sem.)', v: '3 cas', t: 1700 },
+    kind: 'matrix',
+    prismes: [
+      { key: 'PRISME.TECHNIQUE',    desc: 'Accessibilité, qualité et structuration des données' },
+      { key: 'PRISME.BUSINESS',     desc: "Potentiel d'automatisation et modélisation du ROI" },
+      { key: 'PRISME.LEGAL',        desc: 'Sécurité, souveraineté et conformité (AI Act, RGPD)' },
+      { key: 'PRISME.OPERATIONNEL', desc: "Faisabilité d'intégration et priorisation des Quick Wins" },
+    ],
+    points: [
+      { t: "Audit d'infrastructure",       d: "Cartographie de vos bases de données et évaluation de leur exploitabilité par des modèles d'IA." },
+      { t: 'Gouvernance & Conformité',  d: "Sécurisation de vos données (RGPD) et structuration d'une gouvernance IA face aux exigences de l'AI Act." },
+      { t: "Priorisation des cas d'usage", d: "Identification des quick wins à fort impact pour générer du ROI dès les premières semaines." },
+      { t: "Roadmap d'exécution",          d: "Structuration de la roadmap et approche Human in the loop pour garantir l'adoption métier." },
     ],
   },
   '02': {
