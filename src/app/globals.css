@@ -1227,9 +1227,7 @@ section { position: relative; padding: 120px 0; scroll-margin-top: 80px; }
   padding: 48px 40px;
   border: 1px solid var(--line-2);
   border-radius: 20px;
-  background:
-    radial-gradient(ellipse 80% 50% at 50% -5%, oklch(1 0 0 / 0.055) 0%, transparent 65%),
-    oklch(1 0 0 / 0.02);
+  background: oklch(1 0 0 / 0.02);
   box-shadow: 0 1px 0 0 oklch(1 0 0 / 0.1) inset, 0 28px 56px -12px oklch(0 0 0 / 0.45);
 }
 @media (max-width: 900px) {
