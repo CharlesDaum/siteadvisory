@@ -60,7 +60,7 @@ export const SERVICE_DEMOS: Record<string, { kind: string; [key: string]: unknow
   '02': {
     kind: 'roadmap',
     quarters: [
-      { q: 'Q1', items: ['Pilote agent support', 'POC RAG legal'] },
+      { q: 'Q1', items: ['Pilote agent support', 'POC RAG légal'] },
       { q: 'Q2', items: ['Mise en prod agent', 'Auto. factures'] },
       { q: 'Q3', items: ['Scale agent v2', 'Diagnostic vente'] },
       { q: 'Q4', items: ['Plateforme commune', 'Formation N1'] },
@@ -71,13 +71,13 @@ export const SERVICE_DEMOS: Record<string, { kind: string; [key: string]: unknow
     log: [
       { t: 'recv', text: 'Question support reçue (#4729)' },
       { t: 'rag',  text: 'RAG → 3 documents pertinents' },
-      { t: 'gen',  text: 'Génération réponse (1.2s)' },
+      { t: 'gen',  text: 'Génération de réponse (1.2s)' },
       { t: 'ok',   text: 'Envoi · résolu en 4s · score 0.94' },
     ],
   },
   '04': {
     kind: 'flow',
-    nodes: ['Email entrant', 'Classification IA', 'Extraction données', 'Insert ERP', 'Notification'],
+    nodes: ['Email entrant', 'Classification IA', 'Extraction de données', 'Insert ERP', 'Notification'],
   },
   '05': {
     kind: 'curriculum',
