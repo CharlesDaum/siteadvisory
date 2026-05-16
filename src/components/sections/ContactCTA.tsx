@@ -10,20 +10,17 @@ export default function ContactCTA() {
             Prochaine étape
           </span>
           <h2>
-            Identifions ensemble votre{' '}
-            <em>première opportunité concrète.</em>
+            Ne laissez pas l&apos;IA rester{' '}
+            <em>un simple sujet de veille.</em>
           </h2>
           <p>
-            45 minutes, gratuites, sans engagement. Un consultant senior analyse votre
-            contexte, identifie l&apos;opportunité IA la plus rentable et vous remet
-            un plan d&apos;action exploitable dès le premier appel.
+            Identifions ensemble vos opportunités à plus fort ROI. En 30 minutes, nos experts
+            évaluent vos enjeux métiers, la faisabilité technique et l&apos;impact de vos futures
+            solutions IA.
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <MagneticButton primary href="#contact">
-              Réserver 45 min <span className="arrow">→</span>
-            </MagneticButton>
-            <MagneticButton href="#manifeste">
-              Lire le manifeste
+              Évaluer mon potentiel IA <span className="arrow">→</span>
             </MagneticButton>
           </div>
           <div className="hero-guarantees" style={{ justifyContent: 'center', marginTop: 40 }}>
