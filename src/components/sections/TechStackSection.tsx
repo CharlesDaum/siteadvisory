@@ -148,9 +148,13 @@ const LOGOS = [
 function Logo({ name, hex, path, viewBox = '0 0 24 24' }: { name: string; hex: string; path: string; viewBox?: string }) {
   const color = `#${hex}`
   return (
-    <div className="logo-cloud-item" title={name}>
+    <div
+      className="logo-cloud-item"
+      title={name}
+      style={{ '--logo-glow': `${color}66` } as React.CSSProperties}
+    >
       <div className="logo-cloud-icon">
-        <svg viewBox={viewBox} width={36} height={36} fill={color} aria-hidden>
+        <svg viewBox={viewBox} width={44} height={44} fill={color} aria-hidden>
           <path d={path} />
         </svg>
       </div>

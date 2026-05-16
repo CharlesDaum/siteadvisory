@@ -1222,45 +1222,56 @@ section { position: relative; padding: 120px 0; scroll-margin-top: 80px; }
 .logo-cloud {
   display: grid;
   grid-template-columns: repeat(9, 1fr);
-  gap: 28px 16px;
-  margin-top: 52px;
+  gap: 36px 12px;
+  margin-top: 56px;
+  padding: 40px 36px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: oklch(1 0 0 / 0.02);
 }
 @media (max-width: 900px) {
-  .logo-cloud { grid-template-columns: repeat(6, 1fr); }
+  .logo-cloud { grid-template-columns: repeat(6, 1fr); padding: 28px 20px; }
 }
 @media (max-width: 560px) {
-  .logo-cloud { grid-template-columns: repeat(4, 1fr); gap: 20px 12px; }
+  .logo-cloud { grid-template-columns: repeat(4, 1fr); gap: 24px 10px; padding: 20px 12px; }
 }
 
 .logo-cloud-item {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
-  opacity: 0.45;
-  transition: opacity 0.2s;
+  gap: 10px;
+  opacity: 0.4;
+  transition: opacity 0.25s, filter 0.25s, transform 0.2s;
   cursor: default;
 }
 
 .logo-cloud-item:hover {
   opacity: 1;
+  filter: drop-shadow(0 0 10px var(--logo-glow, oklch(1 0 0 / 0.25)));
+  transform: translateY(-2px);
 }
 
 .logo-cloud-icon {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 48px;
+  height: 48px;
 }
 
 .logo-cloud-name {
   font-family: var(--mono);
-  font-size: 9.5px;
-  letter-spacing: 0.07em;
+  font-size: 9px;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--ink-3);
+  color: var(--ink-4);
   white-space: nowrap;
+  transition: color 0.25s;
+}
+
+.logo-cloud-item:hover .logo-cloud-name {
+  color: var(--ink-2);
 }
 
 /* =============================================================================
