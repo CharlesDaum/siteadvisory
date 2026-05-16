@@ -134,9 +134,10 @@ export default function HeroSection() {
         <div className="hero-grid">
           <div data-reveal>
             <p className="hero-lede">
-              Du diagnostic stratégique au premier agent déployé : nous construisons
-              des solutions IA mesurables sur vos KPIs, sans POC orphelin,
-              sans junior en mission, sans dépendance technologique.
+              Du diagnostic stratégique au premier agent déployé Nous accélérons
+              votre transformation en alignant le potentiel de l&apos;IA sur vos enjeux
+              métiers. Fini les POCs sans lendemain, nous construisons des architectures
+              souveraines avec une intégration fluide dans votre écosystème.
             </p>
             <div className="hero-cta-row">
               <MagneticButton primary href="#contact">
