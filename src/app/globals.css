@@ -233,7 +233,7 @@ button { font-family: inherit; cursor: pointer; }
  * Sections
  * ============================================================================= */
 
-section { position: relative; padding: 120px 0; }
+section { position: relative; padding: 120px 0; scroll-margin-top: 80px; }
 @media (max-width: 720px) { section { padding: 80px 0; } }
 
 .section-head {
@@ -1196,12 +1196,71 @@ section { position: relative; padding: 120px 0; }
   .stat-row,
   .stat-row-reversed {
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 28px;
+  }
+  .stat-row + .stat-row {
+    margin-top: 48px;
+    padding-top: 48px;
   }
   .stat-row-reversed .stat-viz { order: 0; }
   .stat-row-reversed .stat-text { order: 0; }
+  .stat-viz { justify-content: flex-start; }
   .ev-pills { flex-direction: row; }
-  .ev-pill { width: 13px; height: 48px; }
+  .ev-pill { width: 13px; height: 40px; }
+  .stat-headline { font-size: clamp(26px, 7vw, 36px); }
+}
+
+/* =============================================================================
+ * Tech Stack Section
+ * ============================================================================= */
+
+.tech-section {
+  background: var(--bg-2);
+  border-bottom: 1px solid var(--line);
+}
+
+.logo-cloud {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 28px 16px;
+  margin-top: 52px;
+}
+@media (max-width: 900px) {
+  .logo-cloud { grid-template-columns: repeat(6, 1fr); }
+}
+@media (max-width: 560px) {
+  .logo-cloud { grid-template-columns: repeat(4, 1fr); gap: 20px 12px; }
+}
+
+.logo-cloud-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  opacity: 0.45;
+  transition: opacity 0.2s;
+  cursor: default;
+}
+
+.logo-cloud-item:hover {
+  opacity: 1;
+}
+
+.logo-cloud-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+}
+
+.logo-cloud-name {
+  font-family: var(--mono);
+  font-size: 9.5px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+  white-space: nowrap;
 }
 
 /* =============================================================================
@@ -1421,6 +1480,12 @@ section { position: relative; padding: 120px 0; }
  * ============================================================================= */
 
 .cta { position: relative; padding: 140px 0; overflow: hidden; }
+@media (max-width: 720px) {
+  .cta { padding: 80px 0; }
+  .huge-mark { display: none; }
+  .cta h2 { font-size: clamp(44px, 11vw, 72px); }
+  .cta p { font-size: 16px; }
+}
 .cta-inner { text-align: center; position: relative; z-index: 1; }
 .cta h2 {
   font-family: var(--serif); font-weight: 400;

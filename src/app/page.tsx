@@ -13,6 +13,7 @@ import CasUsageGrid from '@/components/sections/CasUsageGrid'
 import CommitmentsSection from '@/components/sections/CommitmentsSection'
 import ContactCTA from '@/components/sections/ContactCTA'
 import EvidenceSection from '@/components/sections/EvidenceSection'
+import TechStackSection from '@/components/sections/TechStackSection'
 
 export default function HomePage() {
   useReveal()
@@ -23,6 +24,7 @@ export default function HomePage() {
       <MarqueeSection />
       <TestimonialsSection />
       <ServicesGrid />
+      <TechStackSection />
       <LLMAgentsDiagram />
       <ApproacheTimeline />
       <EvidenceSection />
