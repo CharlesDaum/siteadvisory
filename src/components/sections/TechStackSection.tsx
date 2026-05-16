@@ -151,7 +151,7 @@ function Logo({ name, hex, path, viewBox = '0 0 24 24' }: { name: string; hex: s
     <div
       className="logo-cloud-item"
       title={name}
-      style={{ '--logo-glow': `${color}66` } as React.CSSProperties}
+      style={{ '--logo-glow': `${color}99` } as React.CSSProperties}
     >
       <div className="logo-cloud-icon">
         <svg viewBox={viewBox} width={44} height={44} fill={color} aria-hidden>
