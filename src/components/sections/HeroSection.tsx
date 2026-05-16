@@ -134,7 +134,7 @@ export default function HeroSection() {
         <div className="hero-grid">
           <div data-reveal>
             <p className="hero-lede">
-              Du diagnostic stratégique au premier agent déployé Nous accélérons
+              Du diagnostic stratégique au premier agent déployé : nous accélérons
               votre transformation en alignant le potentiel de l&apos;IA sur vos enjeux
               métiers. Fini les POCs sans lendemain, nous construisons des architectures
               souveraines avec une intégration fluide dans votre écosystème.
