@@ -135,7 +135,7 @@ export default function HeroSection() {
           <div data-reveal>
             <p className="hero-lede">
               Du diagnostic stratégique au premier agent déployé : nous construisons
-              des solutions IA mesurables sur vos KPIs — sans POC orphelin,
+              des solutions IA mesurables sur vos KPIs, sans POC orphelin,
               sans junior en mission, sans dépendance technologique.
             </p>
             <div className="hero-cta-row">

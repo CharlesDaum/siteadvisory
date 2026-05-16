@@ -36,7 +36,7 @@ export default function CommitmentsSection() {
               <span style={{ fontStyle: 'italic', color: 'var(--accent)' }}>non négociables.</span>
             </h2>
             <p className="section-sub" style={{ marginTop: 20 }}>
-              Ces trois engagements guident chaque décision, chaque architecture et chaque livrable — sans exception.
+              Ces trois engagements guident chaque décision, chaque architecture et chaque livrable, sans exception.
             </p>
           </div>
         </div>

@@ -21,7 +21,7 @@ export const PAIN_POINTS = [
   {
     n: '02',
     t: "Des ESN qui rebadgent leurs consultants IT en experts IA",
-    d: "Sans maîtrise réelle des LLMs, du RAG ou de l'évaluation des modèles, vous obtenez une architecture sous-optimale — et c'est vous qui portez le risque.",
+    d: "Sans maîtrise réelle des LLMs, du RAG ou de l'évaluation des modèles, vous obtenez une architecture sous-optimale, et c'est vous qui portez le risque.",
   },
   {
     n: '03',
@@ -35,12 +35,12 @@ export const DIFFERENTIATORS = [
   { n: '02', t: "Seniors exclusivement en mission", d: "La personne qui présente en réunion est celle qui code et déploie. Zéro junior en contact client, zéro délégation non déclarée." },
   { n: '03', t: "Production, pas des slides", d: "Chaque mission se conclut par une solution fonctionnelle avec un dashboard de KPIs. Un rapport de 80 pages sans livrable opérationnel n'est pas un résultat." },
   { n: '04', t: "Autonomie, pas dépendance", d: "Nous documentons, nous formons, nous transférons. À l'issue de chaque mission, vos équipes peuvent faire évoluer la solution sans nous." },
-  { n: '05', t: "Indépendance technologique totale", d: "Aucun partenariat commercial avec les éditeurs. Nous recommandons ce qui convient à votre architecture — open-source, cloud ou on-premise." },
+  { n: '05', t: "Indépendance technologique totale", d: "Aucun partenariat commercial avec les éditeurs. Nous recommandons ce qui convient à votre architecture : open-source, cloud ou on-premise." },
 ]
 
 export const SERVICES = [
-  { n: '01', t: 'Diagnostic Data & IA', d: "Cartographie de votre maturité data et shortlist des 5 à 10 opportunités IA à fort ROI — livrée en 2 semaines, chiffrée et priorisée.", tags: ['Audit', 'Quick Win', 'Faisabilité'], duration: '2 semaines' },
-  { n: '02', t: 'Stratégie & Roadmap IA', d: "Roadmap IA 12 mois avec business case chiffré par cas d'usage — co-construite, validée par votre COMEX, prête à exécuter.", tags: ['Stratégie', 'Gouvernance', 'Roadmap'], duration: '1 semaine' },
+  { n: '01', t: 'Diagnostic Data & IA', d: "Cartographie de votre maturité data et shortlist des 5 à 10 opportunités IA à fort ROI, livrée en 2 semaines, chiffrée et priorisée.", tags: ['Audit', 'Quick Win', 'Faisabilité'], duration: '2 semaines' },
+  { n: '02', t: 'Stratégie & Roadmap IA', d: "Roadmap IA 12 mois avec business case chiffré par cas d'usage, co-construite avec votre COMEX et prête à exécuter.", tags: ['Stratégie', 'Gouvernance', 'Roadmap'], duration: '1 semaine' },
   { n: '03', t: 'Agents IA intelligents', d: "Agents IA connectés à vos données internes, déployés en production avec monitoring continu. Support client, assistant métier, analyse documentaire.", tags: ['LLM', 'RAG', 'Chatbot'], duration: '4–8 sem.' },
   { n: '04', t: 'Automatisation intelligente', d: "Identification et suppression de vos goulots d'étranglement manuels. Vos équipes se concentrent sur les décisions, l'IA gère le reste.", tags: ['Workflow', 'API', 'RPA'], duration: '4–12 sem.' },
   { n: '05', t: 'Formations & Culture IA', d: "Sensibilisation dirigeante, hands-on opérationnel ou executive program. Contenu sur-mesure construit autour de vos cas d'usage réels.", tags: ['Prompting', 'Change'], duration: '1–3 jours' },
@@ -113,7 +113,7 @@ export const PHASES = [
   },
   {
     num: '03', t: 'Déploiement', duration: '4–12 semaines',
-    d: "Sprints de 2 semaines, livrables tangibles à chaque itération. La solution est testée, documentée et transférée à vos équipes avant la clôture — pas après.",
+    d: "Sprints de 2 semaines, livrables tangibles à chaque itération. La solution est testée, documentée et transférée à vos équipes avant la clôture, pas après.",
     deliv: ['Agent IA en production', 'Doc technique', 'KPIs mesurés'],
   },
   {
@@ -169,7 +169,7 @@ export const COMMITMENTS = [
   {
     glyph: 'network',
     t: 'Indépendance technologique',
-    d: "Aucun partenariat commercial avec les éditeurs. Nous recommandons ce qui performe le mieux pour votre architecture — open-source, propriétaire ou hybride.",
+    d: "Aucun partenariat commercial avec les éditeurs. Nous recommandons ce qui performe le mieux pour votre architecture : open-source, propriétaire ou hybride.",
   },
   {
     glyph: 'shield',

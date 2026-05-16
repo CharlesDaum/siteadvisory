@@ -28,7 +28,7 @@ export default function ProblemSection() {
             </h3>
             <p className="lede">
               Les ESN survendent. Les POC s&apos;enlisent. Les équipes résistent.
-              Trois patterns que nous voyons chaque semaine — et que nous avons appris à éviter.
+              Trois patterns que nous voyons chaque semaine, et que nous avons appris à éviter.
             </p>
             <div data-reveal-stagger>
               {PAIN_POINTS.map((p) => (
@@ -52,7 +52,7 @@ export default function ProblemSection() {
             <p className="lede">
               Un cabinet construit uniquement autour de l&apos;IA. Pas de digitalisation
               généraliste, pas de rebadge. Cinq engagements qui structurent chaque
-              mission — du premier appel à la mise en production.
+              mission, du premier appel à la mise en production.
             </p>
             <div data-reveal-stagger>
               {DIFFERENTIATORS.map((p) => (

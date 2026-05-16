@@ -3,7 +3,7 @@ const STATEMENTS = [
     eyebrow: 'Résultats mesurés',
     num: '3 sur 4',
     headline: 'entreprises observent déjà un ROI concret grâce à l\'IA.',
-    body: 'Le ROI de l\'IA n\'est plus théorique : il est aujourd\'hui mesurable à grande échelle. La vraie question n\'est plus d\'utiliser l\'IA, mais à quelle vitesse vous l\'intégrez — car l\'écart se creuse chaque trimestre entre les entreprises qui automatisent et celles qui attendent.',
+    body: 'Le ROI de l\'IA n\'est plus théorique : il est aujourd\'hui mesurable à grande échelle. La vraie question n\'est plus d\'utiliser l\'IA, mais à quelle vitesse vous l\'intégrez, car l\'écart se creuse chaque trimestre entre les entreprises qui automatisent et celles qui attendent.',
     source: 'Deloitte — State of Generative AI Report',
     sourceUrl: 'https://www2.deloitte.com/us/en/pages/about-deloitte/articles/press-releases/state-of-generative-ai.html',
     color: 'var(--accent)',

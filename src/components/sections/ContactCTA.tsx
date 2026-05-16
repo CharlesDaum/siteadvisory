@@ -16,7 +16,7 @@ export default function ContactCTA() {
           <p>
             45 minutes, gratuites, sans engagement. Un consultant senior analyse votre
             contexte, identifie l&apos;opportunité IA la plus rentable et vous remet
-            un plan d&apos;action exploitable — dès le premier appel.
+            un plan d&apos;action exploitable dès le premier appel.
           </p>
           <div style={{ display: 'flex', gap: 12, justifyContent: 'center', flexWrap: 'wrap' }}>
             <MagneticButton primary href="#contact">

@@ -179,7 +179,7 @@ export default function TechStackSection() {
             <p className="section-sub" style={{ marginTop: 20 }}>
               Pourquoi se contenter de produits prêts à l&apos;emploi alors que vous pouvez opter
               pour des solutions sur mesure ? Nous mobilisons les outils de pointe de l&apos;IA
-              générative pour concevoir des architectures adaptées à vos enjeux — en nous
+              générative pour concevoir des architectures adaptées à vos enjeux, en nous
               branchant sur les plateformes que vous utilisez déjà.
             </p>
           </div>
